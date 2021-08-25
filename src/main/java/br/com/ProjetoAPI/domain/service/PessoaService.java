@@ -1,5 +1,8 @@
 package br.com.ProjetoAPI.domain.service;
 
+import br.com.ProjetoAPI.domain.exception.NegocioException;
+import br.com.ProjetoAPI.domain.model.Pessoa;
+import br.com.ProjetoAPI.domain.repository.PessoaRepository;
 import br.com.senai.domain.exception.NegocioException;
 import br.com.senai.domain.model.Pessoa;
 import br.com.senai.domain.repository.PessoaRepository;
@@ -15,12 +18,11 @@ public class PessoaService {
 
     @Transactional
     public Pessoa cadastrar(Pessoa pessoa){
-//        boolean emailValidation = pessoaRepository.findByEmail(pessoa.getEmail())
-//                .isPresent();
-//
-//        if(emailValidation){
-//            throw  new NegocioException("Já existe uma pessoa com este e-mail cadastrado.");
-//        }
+        boolean emailValidation = pessoaRepository.findByEmail(pessoa.getEmail())
+                .isPresent();
+        if(emailValidation){
+            throw  new NegocioException("Já existe uma pessoa com este e-mail cadastrado.");
+        }
 
         return pessoaRepository.save(pessoa);
     }

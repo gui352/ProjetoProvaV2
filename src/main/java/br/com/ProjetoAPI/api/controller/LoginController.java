@@ -1,5 +1,10 @@
 package br.com.ProjetoAPI.api.controller;
 
+import br.com.ProjetoAPI.api.model.input.UsuarioInputDTO;
+import br.com.ProjetoAPI.domain.model.AuthenticationResponse;
+import br.com.ProjetoAPI.domain.model.Pessoa;
+import br.com.ProjetoAPI.security.ImplementsUserDetailsService;
+import br.com.ProjetoAPI.security.JWTUtil;
 import br.com.senai.api.assembler.UsuarioAssembler;
 import br.com.senai.api.model.input.UsuarioInputDTO;
 import br.com.senai.domain.model.AuthenticationResponse;
@@ -23,25 +28,25 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
     private ImplementsUserDetailsService implementsUserDetailsService;
     private JWTUtil jwtUtil;
-    private UsuarioAssembler usuarioAssembler;
+    private PessoaController pessoaAssembler;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody UsuarioInputDTO usuarioInputDTO) throws Exception{
-        Usuario usuario = usuarioAssembler.toEntity(usuarioInputDTO);
+        Pessoa pessoa = pessoaAssembler.toEntity(usuarioInputDTO);
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            usuario.getUsername(), usuario.getPassword())
+                            pessoa.getUsername(), pessoa.getPassword())
             );
         } catch (BadCredentialsException ex){
             throw new Exception("Usuário ou senha inválidos.", ex);
         }
 
         final UserDetails userDetails = implementsUserDetailsService
-                .loadUserByUsername(usuario.getUsername());
+                .loadUserByUsername(pessoa.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, usuarioAssembler.toModel(usuario)));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, pessoaAssembler.toModel(pessoa)));
     }
 
 }
