@@ -1,1 +1,1 @@
-ALTER TABLE projectstore.pessoas DROP COLUMN perfil;
+ALTER TABLE projetoloja.pessoas DROP COLUMN perfil;

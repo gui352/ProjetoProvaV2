@@ -1,8 +1,17 @@
 package br.com.ProjetoAPI.api.controller;
 
 import br.com.ProjetoAPI.api.assembler.RolePessoaAssembler;
+import br.com.ProjetoAPI.api.model.RolePessoaDTO;
+import br.com.ProjetoAPI.api.model.input.RolePessoaInputDTO;
+import br.com.ProjetoAPI.domain.model.RolePessoa;
+import br.com.ProjetoAPI.domain.repository.RolePessoaRepository;
+import br.com.ProjetoAPI.domain.service.RolePessoaService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -10,30 +19,30 @@ import org.springframework.web.bind.annotation.*;
 public class RolePessoaController {
 
     RolePessoaAssembler rolePessoaAssembler;
-    RoleUsuarioRepository roleUsuarioRepository;
-    RoleUsuarioService roleUsuarioService;
+    RolePessoaRepository rolePessoaRepository;
+    RolePessoaService rolePessoaService;
 
     @PostMapping
-    public RoleUsuarioDTO cadastrar(@Valid @RequestBody RoleUsuarioInputDTO roleUsuarioInputDTO){
-        RolePessoa novaRole = rolePessoaAssembler.toEntity(roleUsuarioInputDTO);
-        RolePessoa rolePessoa = roleUsuarioService.cadastrar(novaRole);
+    public RolePessoaDTO cadastrar(@Valid @RequestBody RolePessoaInputDTO rolePessoaInputDTO){
+        RolePessoa novaRole = rolePessoaAssembler.toEntity(rolePessoaInputDTO);
+        RolePessoa rolePessoa = rolePessoaService.cadastrar(novaRole);
         return rolePessoaAssembler.toModel(rolePessoa);
     }
 
     @GetMapping
-    public List<RoleUsuarioDTO> listar() {
-        return roleUsuarioService.listar();
+    public List<RolePessoaDTO> listar() {
+        return rolePessoaService.listar();
     }
 
     @GetMapping("/buscar/{roleId}")
-    public ResponseEntity<RoleUsuarioDTO> buscarPorId(@PathVariable Long roleId) {
-        return roleUsuarioService.buscarId(roleId);
+    public ResponseEntity<RolePessoaDTO> buscarPorId(@PathVariable Long roleId) {
+        return rolePessoaService.buscarId(roleId);
     }
 
     @PutMapping("/{roleId}")
-    public ResponseEntity<RoleUsuarioDTO> editar(@Valid @PathVariable Long roleId, @RequestBody RoleUsuarioInputDTO roleUsuarioInputDTO) {
-        RolePessoa rolePessoa1 = rolePessoaAssembler.toEntity(roleUsuarioInputDTO);
-        roleUsuarioService.editar(roleId, rolePessoa1);
+    public ResponseEntity<RolePessoaDTO> editar(@Valid @PathVariable Long roleId, @RequestBody RolePessoaInputDTO rolePessoaInputDTO) {
+        RolePessoa rolePessoa1 = rolePessoaAssembler.toEntity(rolePessoaInputDTO);
+        rolePessoaService.editar(roleId, rolePessoa1);
         return ResponseEntity.ok(rolePessoaAssembler.toModel(rolePessoa1));
     }
 }

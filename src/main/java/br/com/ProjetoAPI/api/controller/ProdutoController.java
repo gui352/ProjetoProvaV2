@@ -1,9 +1,18 @@
 package br.com.ProjetoAPI.api.controller;
 
 import br.com.ProjetoAPI.api.assembler.ProdutoAssembler;
+import br.com.ProjetoAPI.api.model.ProdutoDTO;
+import br.com.ProjetoAPI.api.model.input.ProdutoInputDTO;
+import br.com.ProjetoAPI.domain.model.Produto;
 import br.com.ProjetoAPI.domain.repository.ProdutoRepository;
+import br.com.ProjetoAPI.domain.service.ProdutoService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController

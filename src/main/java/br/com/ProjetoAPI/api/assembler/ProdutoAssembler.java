@@ -2,6 +2,7 @@ package br.com.ProjetoAPI.api.assembler;
 
 import br.com.ProjetoAPI.api.model.ProdutoDTO;
 import br.com.ProjetoAPI.api.model.input.ProdutoInputDTO;
+import br.com.ProjetoAPI.domain.model.Produto;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

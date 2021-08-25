@@ -10,6 +10,9 @@ import java.util.Optional;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
 
+     @Query("select p from Pessoa p where p.email = ?1")
+     Pessoa findByUsername(String email);
+
      @Query("SELECT p FROM Pessoa p WHERE p.email = ?1")
-     Pessoa findByEmail(String email);
+     Optional<Pessoa> findByEmail(String email);
 }

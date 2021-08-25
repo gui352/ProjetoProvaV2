@@ -1,7 +1,7 @@
 package br.com.ProjetoAPI.api.exceptionhandler;
 
-import br.com.senai.domain.exception.EntidadeNaoEncontradaException;
-import br.com.senai.domain.exception.NegocioException;
+import br.com.ProjetoAPI.domain.exception.EntidadeNaoEncontradaException;
+import br.com.ProjetoAPI.domain.exception.NegocioException;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

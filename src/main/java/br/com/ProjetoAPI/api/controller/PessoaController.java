@@ -60,7 +60,7 @@ public class PessoaController {
         if(!pessoaRepository.existsById(codigo)) {
             return ResponseEntity.notFound().build();
         }
-        pessoaService.deletar(codigo);
+        pessoaService.excluir(codigo);
         return ResponseEntity.noContent().build();
     }
 }

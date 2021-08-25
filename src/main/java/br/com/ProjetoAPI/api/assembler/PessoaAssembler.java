@@ -1,8 +1,8 @@
 package br.com.ProjetoAPI.api.assembler;
 
-import br.com.senai.api.model.PessoaDTO;
-import br.com.senai.api.model.input.PessoaInputDTO;
-import br.com.senai.domain.model.Pessoa;
+import br.com.ProjetoAPI.api.model.PessoaDTO;
+import br.com.ProjetoAPI.api.model.input.PessoaInputDTO;
+import br.com.ProjetoAPI.domain.model.Pessoa;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

@@ -1,8 +1,8 @@
 package br.com.ProjetoAPI.security;
 
-import br.com.senai.domain.exception.NegocioException;
-import br.com.senai.domain.model.Usuario;
-import br.com.senai.domain.repository.UsuarioRepository;
+import br.com.ProjetoAPI.domain.exception.NegocioException;
+import br.com.ProjetoAPI.domain.model.Pessoa;
+import br.com.ProjetoAPI.domain.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,24 +16,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ImplementsUserDetailsService implements UserDetailsService {
 
-    private UsuarioRepository usuarioRepository;
+    private PessoaRepository pessoaRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByEmail(email);
+        Pessoa pessoa = pessoaRepository.findByUsername(email);
 
-        if(usuario == null){
+        if(pessoa == null){
             throw new NegocioException("Usuário ou senha inválido.");
         }
 
         return new User(
-                usuario.getUsername(),
-                usuario.getPassword(),
+                pessoa.getUsername(),
+                pessoa.getPassword(),
                 true,
                 true,
                 true,
                 true,
-                usuario.getAuthorities()
+                pessoa.getAuthorities()
         );
     }
 }

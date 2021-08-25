@@ -2,6 +2,8 @@ package br.com.ProjetoAPI.api.assembler;
 
 import br.com.ProjetoAPI.api.model.RolePessoaDTO;
 import br.com.ProjetoAPI.api.model.input.RolePessoaInputDTO;
+import br.com.ProjetoAPI.domain.model.RolePessoa;
+import br.com.ProjetoAPI.domain.repository.RolePessoaRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 public class RolePessoaAssembler {
 
     private ModelMapper modelMapper;
-    private RoleUsuarioRepository roleUsuarioRepository;
+    private RolePessoaRepository roleUsuarioRepository;
 
     public RolePessoa toEntity(RolePessoaInputDTO rolePessoaInputDTO){
         return modelMapper.map(rolePessoaInputDTO, RolePessoa.class);

@@ -43,8 +43,8 @@ public class Pessoa implements UserDetails {
     String senha;
 
     @ManyToMany
-    @JoinTable(name = "role_usuarios",
-            joinColumns = @JoinColumn(name = "usuarios_id", referencedColumnName = "id"),
+    @JoinTable(name = "role_pessoas",
+            joinColumns = @JoinColumn(name = "pessoas_codigo", referencedColumnName = "codigo"),
             inverseJoinColumns = @JoinColumn(name = "role_nome_role", referencedColumnName = "nomeRole"))
     private List<Role> roles;
 
