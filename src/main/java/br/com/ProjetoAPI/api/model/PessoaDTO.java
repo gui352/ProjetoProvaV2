@@ -11,5 +11,7 @@ public class PessoaDTO {
 
     private String nome;
 
-    private PessoaLoginDTO pessoaLoginDTO;
+    private String email;
+
+    private String senha;
 }

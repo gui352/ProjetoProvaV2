@@ -24,22 +24,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JWTRequestFilter jwtRequestFilter;
 
     private static final String[] AUTH_LIST = {
-      "/",
-      "/pessoas",
-      "/pessoas/{pessoaId}"
+            "/",
+            "/pessoas",
+            "/pessoas/listar",
+            "/pessoas/cadastrar",
+            "/pessoas/{codigo}",
+            "/produtos",
+            "/produtos/listar",
+            "/produtos/cadastrar",
+            "/produtos/{codigo}",
+            "/roles",
+            "/roles/{roleId}"
     };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                    .antMatchers(HttpMethod.GET, "/entregas")
-                        .hasRole("ADMIN")
                     .antMatchers("/authenticate").permitAll()
                     .antMatchers(HttpMethod.GET, AUTH_LIST).permitAll()
-                    .antMatchers(HttpMethod.POST, AUTH_LIST).permitAll()
-                    .antMatchers(HttpMethod.PUT, AUTH_LIST).permitAll()
-                    .antMatchers(HttpMethod.DELETE, AUTH_LIST).permitAll()
+                    .antMatchers(HttpMethod.POST, AUTH_LIST).hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, AUTH_LIST).hasRole("ADMIN")
+                    .antMatchers(HttpMethod.DELETE, AUTH_LIST).hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().cors()
                 .and().sessionManagement()

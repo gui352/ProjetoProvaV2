@@ -23,22 +23,20 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "pessoas")
 public class Pessoa implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long codigo;
 
-    @NotBlank
     @Size(max = 60)
     String nome;
 
-    @NotBlank
     @Email
     @Size(min = 5)
     String email;
 
-    @NotBlank
     @Size(min = 6)
     String senha;
 

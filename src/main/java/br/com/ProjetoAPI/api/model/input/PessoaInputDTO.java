@@ -10,10 +10,9 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class PessoaInputDTO {
 
-    @NotBlank
     private String nome;
 
-    @NotNull
-    private PessoaLoginInputDTO usuario;
+    private String email;
 
+    private String senha;
 }

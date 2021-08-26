@@ -9,7 +9,7 @@ public class RolePessoaDTO {
 
     private Long id;
 
-    private Long usuarios_id;
+    private Long pessoas_codigo;
 
     private  String role_nome_role;
 

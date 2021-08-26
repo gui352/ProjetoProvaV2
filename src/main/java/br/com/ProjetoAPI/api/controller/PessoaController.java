@@ -29,8 +29,7 @@ public class PessoaController {
     @PostMapping("/cadastrar")
     public PessoaDTO cadastrar(@Valid @RequestBody PessoaInputDTO pessoaInputDTO){
         Pessoa novaPessoa = pessoaAssembler.toEntity(pessoaInputDTO);
-        novaPessoa.setSenha(new BCryptPasswordEncoder()
-                .encode(pessoaInputDTO.getUsuario().getSenha()));
+        novaPessoa.setSenha(new BCryptPasswordEncoder().encode(pessoaInputDTO.getSenha()));
         Pessoa pessoa = pessoaService.cadastrar(novaPessoa);
         RolePessoa novaRole = new RolePessoa();
         novaRole.setPessoas_codigo(novaPessoa.getCodigo());
@@ -49,8 +48,7 @@ public class PessoaController {
     public ResponseEntity<PessoaDTO> editar(@Valid @PathVariable Long codigo,
                                             @RequestBody PessoaInputDTO pessoaInputDTO){
         Pessoa pessoa = pessoaAssembler.toEntity(pessoaInputDTO);
-        pessoa.setSenha(new BCryptPasswordEncoder()
-                .encode(pessoaInputDTO.getUsuario().getSenha()));
+        pessoa.setSenha(new BCryptPasswordEncoder().encode(pessoaInputDTO.getSenha()));
         pessoaService.editar(codigo,pessoa);
         return ResponseEntity.ok(pessoaAssembler.toModel(pessoa));
     }

@@ -42,6 +42,8 @@ public class RolePessoaController {
     @PutMapping("/{roleId}")
     public ResponseEntity<RolePessoaDTO> editar(@Valid @PathVariable Long roleId, @RequestBody RolePessoaInputDTO rolePessoaInputDTO) {
         RolePessoa rolePessoa1 = rolePessoaAssembler.toEntity(rolePessoaInputDTO);
+        rolePessoa1.setId(rolePessoa1.getId());
+        rolePessoa1.setPessoas_codigo(rolePessoa1.getPessoas_codigo());
         rolePessoaService.editar(roleId, rolePessoa1);
         return ResponseEntity.ok(rolePessoaAssembler.toModel(rolePessoa1));
     }
